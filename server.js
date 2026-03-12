@@ -1,11 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static frontend files from the index.html folder
+app.use(express.static(path.join(__dirname, 'index.html')));
 
 // In-memory "database"
 const teams = new Map(); // id -> team
@@ -71,9 +75,9 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Gully Cricket backend is running' });
 });
 
-// Friendly root route for Render / browser
+// Root route: serve main frontend page
 app.get('/', (req, res) => {
-  res.send('Gully Cricket backend is running. Use /api/health to check status and the /api/* routes for data.');
+  res.sendFile(path.join(__dirname, 'index.html', 'join-match.html'));
 });
 
 // Team endpoints
