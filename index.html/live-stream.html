@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gully Cricket Live - Match Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cricketGreen: '#2D5A27',
+            cricketGold: '#FFD700',
+            cricketDark: '#1A1A1A',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Oswald', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Oswald:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-animations">
+    @keyframes pulse-red {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .live-indicator {
+      animation: pulse-red 1.5s infinite;
+    }
+    .score-glow {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-cricketDark text-white font-sans antialiased min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-cricketGreen border-b-4 border-cricketGold p-4 sticky top-0 z-50 shadow-lg">
+<div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
+<div class="flex items-center space-x-3">
+<!-- Logo placeholder -->
+<div class="w-10 h-10 bg-cricketGold rounded-full flex items-center justify-center">
+<span class="text-cricketGreen font-bold text-xl">GC</span>
+</div>
+<h1 class="font-display text-2xl uppercase tracking-tighter">Gully Cricket <span class="text-cricketGold">Live</span></h1>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center bg-red-600 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest">
+<span class="w-2 h-2 bg-white rounded-full mr-2 live-indicator"></span>
+          Live Stream
+        </div>
+<nav class="hidden md:flex space-x-6 font-semibold uppercase text-sm">
+<a class="hover:text-cricketGold transition-colors" href="#">Home</a>
+<a class="text-cricketGold border-b-2 border-cricketGold" href="#">Match Center</a>
+<a class="hover:text-cricketGold transition-colors" href="#">Tournaments</a>
+</nav>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- BEGIN: LeftColumn (Video & Scoreboard) -->
+<div class="lg:col-span-2 space-y-6">
+<!-- BEGIN: StreamPlayer -->
+<section class="relative group aspect-video bg-black rounded-xl overflow-hidden border-2 border-zinc-800 shadow-2xl" data-purpose="live-stream-container">
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Placeholder for Video Stream -->
+<img alt="Live Stream" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbQa_hBYCPwUcNqQFnEckyd49u9HHLAQfdBe3Illenb2lrk9SUOyFREs-rFaIfb9fiMsI4rktThvZ7qRgASCVZ2qeyZtX4_Sb5nXs2zmTVZYJkQcyYG3EaU0lOc-JO37Av2itr9T1UKpGKfkzV7GZCj-8Jn7-XdLR_IHUHL3XrVfDJkEMPwCa2iH6F7rU0B4X8Wkq008D7EYJ7s6dHwcfcfSNwohKlKJ2YVNFbyZSPS3d-nNWXnBMmmR5kkR0VKSZQeXTVFU16Jt0"/>
+<!-- Overlay Controls -->
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<button class="w-12 h-12 bg-cricketGold rounded-full flex items-center justify-center text-cricketGreen hover:scale-105 transition-transform">
+<svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
+</button>
+<div>
+<p class="text-sm font-bold text-cricketGold">Local Derby: Challengers vs Titans</p>
+<p class="text-xs text-gray-300">Gully Ground #4 • 1,420 watching</p>
+</div>
+</div>
+<div class="flex space-x-3">
+<button class="p-2 hover:bg-white/10 rounded-full transition-colors"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+<button class="p-2 hover:bg-white/10 rounded-full transition-colors"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: StreamPlayer -->
+<!-- BEGIN: RealTimeScoreboard -->
+<section class="bg-zinc-900 border-l-4 border-cricketGold rounded-r-xl p-6 shadow-xl" data-purpose="digital-scoreboard">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<!-- Team Alpha -->
+<div class="text-center md:text-left">
+<h3 class="text-zinc-400 font-bold uppercase text-xs tracking-widest mb-1">Batting</h3>
+<div class="font-display text-4xl text-white flex items-baseline">
+              CHALLENGERS
+            </div>
+</div>
+<!-- Main Score Display -->
+<div class="flex items-center space-x-8">
+<div class="text-center">
+<div class="font-display text-6xl md:text-7xl text-cricketGold score-glow">
+                142<span class="text-zinc-500 mx-1">/</span>4
+              </div>
+<p class="text-zinc-400 font-bold uppercase text-sm mt-2">Overs: 14.3</p>
+</div>
+</div>
+<!-- Secondary Stats -->
+<div class="grid grid-cols-2 gap-4 w-full md:w-auto">
+<div class="bg-zinc-800 p-3 rounded text-center">
+<p class="text-xs text-zinc-500 font-bold">CRR</p>
+<p class="text-lg font-display text-white">9.79</p>
+</div>
+<div class="bg-zinc-800 p-3 rounded text-center">
+<p class="text-xs text-zinc-500 font-bold">EXTRAS</p>
+<p class="text-lg font-display text-white">12</p>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Current Batsmen -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm p-2 bg-cricketGreen/20 border-l-2 border-cricketGreen rounded">
+<span class="font-semibold">Rahul Sharma*</span>
+<span class="font-display text-cricketGold">48(22)</span>
+</div>
+<div class="flex justify-between items-center text-sm p-2">
+<span class="text-zinc-400">Amit Verma</span>
+<span class="font-display">12(10)</span>
+</div>
+</div>
+<!-- Current Bowler -->
+<div class="flex justify-between items-center p-3 bg-zinc-800 rounded">
+<div>
+<p class="text-xs text-zinc-500 uppercase font-bold">Bowling</p>
+<p class="font-semibold">Vikram Singh</p>
+</div>
+<div class="text-right">
+<p class="text-xs text-zinc-500 uppercase font-bold">Figures</p>
+<p class="font-display text-white">2.3-0-24-1</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: RealTimeScoreboard -->
+</div>
+<!-- END: LeftColumn -->
+<!-- BEGIN: RightColumn (Match Highlights) -->
+<aside class="space-y-6">
+<div class="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 shadow-xl">
+<div class="bg-zinc-800 p-4 border-b border-zinc-700 flex justify-between items-center">
+<h2 class="font-display text-xl uppercase italic">Match Highlights</h2>
+<span class="text-xs bg-cricketGold text-cricketGreen px-2 py-0.5 rounded font-bold uppercase">Latest</span>
+</div>
+<div class="divide-y divide-zinc-800">
+<!-- Highlight Item 1 -->
+<div class="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer flex gap-4">
+<div class="w-24 h-16 bg-zinc-700 flex-shrink-0 rounded overflow-hidden relative">
+<img alt="Highlight" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhlVjne3vMjo1gdBqRKJ4rW1Y_2O1xWqACGVKu4oJMHP5rGJhgBaLoOyEnmgJqDAus82J-dHUi2zBtWZJeEPMbRHFCoPjAnBn4OiTs4Zob4-rdiwAP1JCLABJHliHas4GVi0mV8HwNCKiF5zKx5TjVVx2SPj4wLomxCXO-D0wfRuwa_xuqUbtdeUt4WEmfXglF0rRuK98YG8TRqQ-YgbxqWbuZDoKhE5UmbCLwIkKrJbRrOlLL-HgUrEuakexrKMS51bQZJoZGiU"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0">
+<svg class="h-6 w-6 text-white" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
+</div>
+</div>
+<div>
+<p class="text-xs text-cricketGold font-bold mb-1">12.4 Overs</p>
+<h4 class="text-sm font-semibold line-clamp-2">Massive SIX by Rahul over Long-On!</h4>
+</div>
+</div>
+<!-- Highlight Item 2 -->
+<div class="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer flex gap-4">
+<div class="w-24 h-16 bg-zinc-700 flex-shrink-0 rounded overflow-hidden relative">
+<img alt="Highlight" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1X5KIW5uxB0SXNOs-EgYzaYUZM0VLL4TEbKLCQh9b-Nk_uQ1dg8yD908HAjUyF4rJU1lYJmbaMJx4lv9BnG56HOLlKHtT6G_SbTC2JeOvo6nib8_1UAMpUqpUq_hLtNS1hXLwFd9z6BiZSbX1Yu3GaBcglOoNstUOQAo0c2-VaE0y0IMZEb5IorKi5LNPzYtUUQC_r4nLrz_pz8lMn5IjDdekrxcV7CFcgiCd2DvYir7zwTJaofW83w6ie8vMldfsZRu812HjifE"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20">
+<svg class="h-6 w-6 text-white" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
+</div>
+</div>
+<div>
+<p class="text-xs text-red-500 font-bold mb-1">10.2 Overs</p>
+<h4 class="text-sm font-semibold line-clamp-2">WICKET! Captain goes for a duck!</h4>
+</div>
+</div>
+<!-- Highlight Item 3 -->
+<div class="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer flex gap-4">
+<div class="w-24 h-16 bg-zinc-700 flex-shrink-0 rounded overflow-hidden relative">
+<img alt="Highlight" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZDtiZTDcUnWp7sRr5gVgcgmMFKlvnNeXeU-MLtsn8SNKYlH6wIQdZF5LWbdsFvk0Go42BSZHHNorIAxZvL57ImXRjCtl7lhp5P0aB3nACRCuVp_trwuh53GOhUUEskB-2lDEsHJa4nEwcYEO3ST-CxML0aMpz4whX5yR0rgN8pvC7krXZjtCUBREAG1e676ReSlKQHKTvWJwhuG7lX8yNXwUUH00CrvtOuIwrlgTPicpe8X4Da9cnYwJZn0FUtX9XktLXcAWCBKs"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20">
+<svg class="h-6 w-6 text-white" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
+</div>
+</div>
+<div>
+<p class="text-xs text-cricketGold font-bold mb-1">8.5 Overs</p>
+<h4 class="text-sm font-semibold line-clamp-2">Elegant flick for four through mid-wicket</h4>
+</div>
+</div>
+</div>
+<div class="p-4 bg-zinc-800/30 text-center">
+<button class="text-sm text-cricketGold font-bold uppercase hover:underline">View All Highlights</button>
+</div>
+</div>
+<!-- Quick Poll/Interaction -->
+<div class="bg-cricketGreen rounded-xl p-6 text-center shadow-lg border-b-4 border-black/20">
+<h3 class="font-display text-lg uppercase mb-4">Who will win?</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-white/10 hover:bg-white/20 border border-white/20 p-3 rounded font-bold transition-all">CHALLENGERS</button>
+<button class="bg-white/10 hover:bg-white/20 border border-white/20 p-3 rounded font-bold transition-all">TITANS</button>
+</div>
+<div class="mt-4 flex justify-between text-[10px] uppercase font-bold tracking-widest opacity-60">
+<span>64% Vote</span>
+<span>36% Vote</span>
+</div>
+<div class="w-full h-2 bg-black/20 rounded-full mt-1 overflow-hidden">
+<div class="bg-cricketGold h-full" style="width: 64%"></div>
+</div>
+</div>
+</aside>
+<!-- END: RightColumn -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="mt-12 bg-zinc-950 p-8 border-t border-zinc-800 text-center text-zinc-500 text-sm">
+<div class="max-w-7xl mx-auto">
+<p>© 2023 Gully Cricket Live. All rights reserved.</p>
+<div class="mt-4 flex justify-center space-x-6">
+<a class="hover:text-cricketGold" href="#">Terms of Service</a>
+<a class="hover:text-cricketGold" href="#">Privacy Policy</a>
+<a class="hover:text-cricketGold" href="#">About Us</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<script data-purpose="scoreboard-logic">
+    // Mock logic to simulate live updates
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Scoreboard engine initialized...');
+      // In a real app, this would be a WebSocket or SSE connection
+    });
+  </script>
+</body></html>

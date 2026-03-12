@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Management | Elite Sports Pro</title>
+<!-- BEGIN: Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- END: Tailwind CSS CDN -->
+<!-- BEGIN: Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sporty: {
+              black: '#0a0a0a',
+              neon: '#ccff00',
+              gray: '#1f1f1f',
+              white: '#ffffff'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Tailwind Configuration -->
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-layout">
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    /* Sporty High-Contrast Focus Ring */
+    input:focus {
+      outline: none !important;
+      border-color: #ccff00 !important;
+      ring-color: #ccff00 !important;
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="min-h-screen bg-sporty-black flex flex-col items-center p-4 md:p-8">
+<!-- BEGIN: MainContainer -->
+<main class="w-full max-w-4xl bg-sporty-gray border-t-4 border-sporty-neon p-6 md:p-10 shadow-2xl rounded-sm" data-purpose="team-management-container">
+<!-- BEGIN: HeaderSection -->
+<header class="mb-8 border-b border-white/10 pb-6">
+<h1 class="text-4xl font-black italic tracking-tighter text-sporty-white uppercase mb-2">Team Management</h1>
+<p class="text-sporty-neon font-bold text-sm tracking-widest uppercase">Squad Registration &amp; Roster</p>
+</header>
+<!-- END: HeaderSection -->
+<!-- BEGIN: TeamMetaForm -->
+<section class="mb-10" data-purpose="team-metadata-entry">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-black uppercase text-gray-400" for="team-name">Team Name</label>
+<input class="bg-sporty-black border-2 border-white/20 p-3 text-white focus:border-sporty-neon uppercase italic font-bold" id="team-name" placeholder="E.G. TITANS FC" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-black uppercase text-gray-400" for="team-size">Target Roster Size</label>
+<input class="bg-sporty-black border-2 border-white/20 p-3 text-white focus:border-sporty-neon font-bold" id="team-size" min="1" placeholder="11" type="number"/>
+</div>
+</div>
+</section>
+<!-- END: TeamMetaForm -->
+<!-- BEGIN: PlayerListSection -->
+<section class="w-full mb-8" data-purpose="player-roster-table">
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-xl font-black uppercase italic">Active Roster</h2>
+<span class="text-xs font-mono text-gray-500" id="player-count">0 Players Loaded</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="roster-table">
+<thead>
+<tr class="border-b-2 border-sporty-neon bg-white/5">
+<th class="p-4 text-xs font-black uppercase tracking-widest text-gray-400 w-16">#</th>
+<th class="p-4 text-xs font-black uppercase tracking-widest text-gray-400">Player Full Name</th>
+<th class="p-4 text-xs font-black uppercase tracking-widest text-gray-400 w-32 text-center">Jersey No.</th>
+<th class="p-4 text-xs font-black uppercase tracking-widest text-gray-400 w-16"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5" id="player-rows">
+<!-- First Row Placeholder -->
+<tr class="player-entry-row group transition-colors hover:bg-white/5">
+<td class="p-4 font-black italic text-sporty-neon">01</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-lg font-bold placeholder:text-gray-700 p-2" placeholder="ENTER PLAYER NAME" type="text"/>
+</td>
+<td class="p-2">
+<input class="w-full bg-sporty-black border-white/10 text-center font-black text-xl text-sporty-neon p-2" maxlength="3" placeholder="00" type="text"/>
+</td>
+<td class="p-2 text-center">
+<button class="text-gray-600 hover:text-red-500 transition-colors" title="Remove Player">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: PlayerListSection -->
+<!-- BEGIN: ActionButtons -->
+<div class="flex flex-col md:flex-row gap-4 pt-6 border-t border-white/10" data-purpose="form-actions">
+<button class="flex-1 bg-white hover:bg-sporty-neon text-sporty-black font-black uppercase py-4 px-6 transition-all duration-200 flex items-center justify-center gap-2 group" id="add-player-btn">
+<svg class="h-5 w-5 group-hover:scale-125 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+        Add New Player
+      </button>
+<button class="flex-1 bg-sporty-neon hover:bg-white text-sporty-black font-black uppercase py-4 px-6 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-none transition-all duration-200 flex items-center justify-center gap-2" id="save-team-btn">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+        Save Roster
+      </button>
+</div>
+<!-- END: ActionButtons -->
+</main>
+<!-- END: MainContainer -->
+<!-- BEGIN: LogicScript -->
+<script data-purpose="roster-management-logic">
+    document.addEventListener('DOMContentLoaded', () => {
+      const tbody = document.getElementById('player-rows');
+      const addBtn = document.getElementById('add-player-btn');
+      const playerCountDisplay = document.getElementById('player-count');
+
+      const updateCount = () => {
+        const count = tbody.querySelectorAll('.player-entry-row').length;
+        playerCountDisplay.textContent = `${count} Player${count !== 1 ? 's' : ''} Loaded`;
+      };
+
+      const createRow = () => {
+        const count = tbody.querySelectorAll('.player-entry-row').length + 1;
+        const indexStr = count.toString().padStart(2, '0');
+        
+        const row = document.createElement('tr');
+        row.className = 'player-entry-row group transition-colors hover:bg-white/5';
+        row.innerHTML = `
+          <td class="p-4 font-black italic text-sporty-neon">${indexStr}</td>
+          <td class="p-2">
+            <input type="text" class="w-full bg-transparent border-none text-lg font-bold placeholder:text-gray-700 p-2" placeholder="ENTER PLAYER NAME">
+          </td>
+          <td class="p-2">
+            <input type="text" class="w-full bg-sporty-black border-white/10 text-center font-black text-xl text-sporty-neon p-2" placeholder="00" maxlength="3">
+          </td>
+          <td class="p-2 text-center">
+            <button class="remove-btn text-gray-600 hover:text-red-500 transition-colors" title="Remove Player">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </td>
+        `;
+
+        row.querySelector('.remove-btn').addEventListener('click', () => {
+          row.remove();
+          updateCount();
+        });
+
+        return row;
+      };
+
+      addBtn.addEventListener('click', () => {
+        tbody.appendChild(createRow());
+        updateCount();
+      });
+
+      // Initial count update
+      updateCount();
+
+      // Handle the initial row's remove button
+      tbody.querySelector('.remove-btn')?.addEventListener('click', (e) => {
+        e.currentTarget.closest('tr').remove();
+        updateCount();
+      });
+
+      document.getElementById('save-team-btn').addEventListener('click', () => {
+        alert('Squad saved successfully to the database!');
+      });
+    });
+  </script>
+<!-- END: LogicScript -->
+</body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-950" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gully Cricket Admin - Scoring Dashboard</title>
+<!-- BEGIN: Tailwind Setup -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cricket: {
+              green: '#22c55e',
+              red: '#ef4444',
+              gold: '#fbbf24',
+              blue: '#3b82f6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Tailwind Setup -->
+<style data-purpose="custom-animations">
+    .tap-active:active {
+      transform: scale(0.95);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="h-full text-slate-200 font-sans antialiased">
+<div class="min-h-screen flex flex-col md:flex-row">
+<!-- BEGIN: Sidebar Navigation -->
+<nav class="w-full md:w-64 bg-slate-900 border-r border-slate-800 p-6 flex flex-col gap-8" data-purpose="main-navigation">
+<div class="flex items-center gap-3">
+<div class="bg-cricket-green w-10 h-10 rounded-full flex items-center justify-center text-slate-900 font-bold text-xl">G</div>
+<h1 class="text-xl font-bold tracking-tight">GullyCricket</h1>
+</div>
+<div class="flex flex-col gap-2">
+<button class="flex items-center gap-3 bg-slate-800 text-white p-3 rounded-xl transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+          Scoring Control
+        </button>
+<button class="flex items-center gap-3 text-slate-400 hover:bg-slate-800 p-3 rounded-xl transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Team Management
+        </button>
+<button class="flex items-center gap-3 text-slate-400 hover:bg-slate-800 p-3 rounded-xl transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          Match History
+        </button>
+</div>
+<div class="mt-auto border-t border-slate-800 pt-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-slate-700"></div>
+<div>
+<p class="text-sm font-medium">Admin User</p>
+<p class="text-xs text-slate-500">Super Admin</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- END: Sidebar Navigation -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col p-4 md:p-8 gap-6 overflow-y-auto custom-scrollbar">
+<!-- BEGIN: Match Status Header -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6" data-purpose="match-status-summary">
+<div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-center md:text-left">
+<h2 class="text-slate-500 uppercase tracking-widest text-xs font-bold mb-1">Live Match</h2>
+<div class="flex items-center gap-4">
+<span class="text-4xl font-black text-white">142/4</span>
+<span class="px-3 py-1 bg-cricket-green/20 text-cricket-green rounded-full text-sm font-semibold">1st Innings</span>
+</div>
+<p class="text-slate-400 text-sm mt-2">Overs: <span class="text-white">14.2 / 20.0</span></p>
+</div>
+<div class="flex gap-4 items-center">
+<div class="text-center">
+<p class="text-[10px] text-slate-500 uppercase font-bold">Batter 1</p>
+<p class="font-bold text-white">Rahul (42*)</p>
+</div>
+<div class="w-px h-8 bg-slate-800"></div>
+<div class="text-center">
+<p class="text-[10px] text-slate-500 uppercase font-bold">Batter 2</p>
+<p class="font-bold text-white">Amit (15)</p>
+</div>
+</div>
+</div>
+<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-center">
+<h2 class="text-slate-500 uppercase tracking-widest text-xs font-bold mb-4">Team Management</h2>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center bg-slate-950 p-3 rounded-lg border border-slate-800">
+<span class="text-sm text-slate-400">Team A ID:</span>
+<span class="text-sm font-mono text-cricket-gold select-all">#GAL-9821</span>
+</div>
+<button class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-sm rounded-lg transition-colors font-medium" onclick="alert('Generating new ID...')">
+              Generate Team ID
+            </button>
+</div>
+</div>
+</section>
+<!-- END: Match Status Header -->
+<!-- BEGIN: Scoring Control Panel -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6" data-purpose="scoring-controls">
+<!-- Runs Section -->
+<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+<h3 class="text-slate-400 text-sm font-bold uppercase mb-6 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-cricket-green"></span> Add Runs
+          </h3>
+<div class="grid grid-cols-2 gap-4">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 border-slate-700 hover:border-slate-600 transition-all">
+<span class="text-3xl font-black">+1</span>
+<span class="text-[10px] uppercase text-slate-500">Single</span>
+</button>
+<button class="tap-active bg-slate-800 hover:bg-slate-700 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 border-slate-700 hover:border-slate-600 transition-all">
+<span class="text-3xl font-black">+2</span>
+<span class="text-[10px] uppercase text-slate-500">Double</span>
+</button>
+<button class="tap-active bg-cricket-blue/10 border-cricket-blue/50 border hover:bg-cricket-blue/20 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-all">
+<span class="text-3xl font-black text-cricket-blue">+4</span>
+<span class="text-[10px] uppercase text-cricket-blue/70">Boundary</span>
+</button>
+<button class="tap-active bg-cricket-gold/10 border-cricket-gold/50 border hover:bg-cricket-gold/20 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-all">
+<span class="text-3xl font-black text-cricket-gold">+6</span>
+<span class="text-[10px] uppercase text-cricket-gold/70">Maximum</span>
+</button>
+</div>
+<div class="mt-4">
+<button class="tap-active w-full bg-slate-800 hover:bg-slate-700 h-16 rounded-xl text-xl font-bold border-b-4 border-slate-700">0 <span class="text-xs font-normal text-slate-500 uppercase ml-2">Dot Ball</span></button>
+</div>
+</div>
+<!-- Wickets & Extras Section -->
+<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+<h3 class="text-slate-400 text-sm font-bold uppercase mb-6 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-cricket-red"></span> Critical Actions
+          </h3>
+<div class="space-y-4">
+<!-- Wicket Button -->
+<button class="tap-active w-full bg-cricket-red/10 border border-cricket-red/50 hover:bg-cricket-red/20 h-24 rounded-2xl flex items-center justify-center gap-4 border-b-4 transition-all group">
+<div class="bg-cricket-red p-3 rounded-full text-white">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+</div>
+<div class="text-left">
+<span class="text-2xl font-black text-cricket-red block">WICKET!</span>
+<span class="text-[10px] uppercase text-cricket-red/70">Record out &amp; select next batter</span>
+</div>
+</button>
+<!-- Extras Grid -->
+<div class="grid grid-cols-3 gap-3">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all">
+<span class="block font-bold">WD</span>
+<span class="text-[10px] text-slate-500">Wide</span>
+</button>
+<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all">
+<span class="block font-bold">NB</span>
+<span class="text-[10px] text-slate-500">No Ball</span>
+</button>
+<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all">
+<span class="block font-bold">B/LB</span>
+<span class="text-[10px] text-slate-500">Byes</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Scoring Control Panel -->
+<!-- BEGIN: Recent History Log -->
+<section class="bg-slate-900 border border-slate-800 rounded-2xl p-6" data-purpose="match-history-log">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-slate-400 text-sm font-bold uppercase">Recent Ball Log</h3>
+<button class="text-xs text-cricket-blue font-semibold hover:underline">Undo Last Ball</button>
+</div>
+<div class="flex flex-wrap gap-3">
+<!-- Ball 14.2 -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-cricket-blue/20 border border-cricket-blue text-cricket-blue flex items-center justify-center font-bold">4</div>
+<span class="text-[10px] text-slate-500">14.2</span>
+</div>
+<!-- Ball 14.1 -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">1</div>
+<span class="text-[10px] text-slate-500">14.1</span>
+</div>
+<!-- Ball 13.6 (Wicket) -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-cricket-red/20 border border-cricket-red text-cricket-red flex items-center justify-center font-bold">W</div>
+<span class="text-[10px] text-slate-500">13.6</span>
+</div>
+<!-- Ball 13.5 -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">•</div>
+<span class="text-[10px] text-slate-500">13.5</span>
+</div>
+<!-- Ball 13.4 -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-cricket-gold/20 border border-cricket-gold text-cricket-gold flex items-center justify-center font-bold">6</div>
+<span class="text-[10px] text-slate-500">13.4</span>
+</div>
+<!-- Ball 13.3 -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">1</div>
+<span class="text-[10px] text-slate-500">13.3</span>
+</div>
+<!-- More balls... -->
+<div class="flex flex-col items-center gap-1 opacity-50">
+<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">2</div>
+<span class="text-[10px] text-slate-500">13.2</span>
+</div>
+</div>
+</section>
+<!-- END: Recent History Log -->
+</main>
+<!-- END: Main Content Area -->
+</div>
+<!-- BEGIN: Interactive Logic (Simulated) -->
+<script data-purpose="scoring-ui-interactions">
+    // Simple visual feedback for button taps
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Here we would typically update a state or send data to a backend
+        console.log('Action recorded:', btn.innerText.replace(/\n/g, ' '));
+      });
+    });
+  </script>
+<!-- END: Interactive Logic -->
+</body></html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gully Cricket - Team Access</title>
+<!-- BEGIN: Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- END: Tailwind CSS CDN -->
+<!-- BEGIN: Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cricket: {
+              pitch: '#8B4513',
+              grass: '#2d5a27',
+              gold: '#FFD700',
+              action: '#e63946'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Tailwind Configuration -->
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="background-overlay">.stadium-overlay {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuBtGH1cD9hj5Iw_SrcBrse75yegVUhqe8mKwytS8jEqUWlFNOQPREbPtijLL5n8ze0KNXvoaqNsGQSthOfFNwMh_xK7ZTVkJqSK1FCMlaaaLWVlBRht0-AmcvHtd-BxB5KFWolXNlKwwAEuorZoeuOZ_RsWq7NNSfcM3-EHIwPnkVX8RI30N-d3lKF4Z-NPKqAEWn-nq1L5DLzZjT69HDn7POCGEjp_EiuZXZZ5xLmCmypsc2K7NYrg4q4mQkKshRF8muA59n2JDa8);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed
+    }
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    }</style>
+<style data-purpose="animations">
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slide-up {
+      animation: slideUp 0.6s ease-out forwards;
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="stadium-overlay min-h-screen flex items-center justify-center p-4 font-sans text-white">
+<!-- BEGIN: Auth Container -->
+<main class="w-full max-w-md animate-slide-up" data-purpose="auth-container">
+<!-- BEGIN: Header Section -->
+<header class="text-center mb-8" data-purpose="form-header">
+<div class="inline-block p-3 bg-cricket-gold rounded-full mb-4 shadow-lg">
+<!-- Cricket Ball Icon Placeholder -->
+<svg class="h-10 w-10 text-cricket-pitch" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M7 7c2 2 2 8 0 10M17 7c-2 2-2 8 0 10" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h1 class="text-4xl font-black tracking-tight uppercase">Gully Cricket</h1>
+<p class="text-gray-300 mt-2 font-medium">Tournament Team Access</p>
+</header>
+<!-- END: Header Section -->
+<!-- BEGIN: Form Card -->
+<section class="glass-effect rounded-2xl p-8 shadow-2xl" data-purpose="form-card">
+<div class="flex justify-center mb-8 border-b border-white/10" id="tabs">
+<button class="px-6 py-2 text-cricket-gold border-b-2 border-cricket-gold font-bold uppercase text-sm tracking-wider" id="loginTab">Login</button>
+<button class="px-6 py-2 text-gray-400 hover:text-white font-bold uppercase text-sm tracking-wider transition-colors" id="regTab">Register</button>
+</div>
+<!-- BEGIN: LoginForm -->
+<form class="space-y-6" data-purpose="team-login-form" id="loginForm">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-gray-200" for="loginTeamName">Team Name</label>
+<input class="w-full bg-white/10 border-white/20 rounded-lg py-3 px-4 text-white focus:ring-2 focus:ring-cricket-gold focus:border-transparent transition-all" id="loginTeamName" placeholder="Enter registered team name" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-gray-200" for="loginAccessCode">Access Code</label>
+<input class="w-full bg-white/10 border-white/20 rounded-lg py-3 px-4 text-white focus:ring-2 focus:ring-cricket-gold focus:border-transparent transition-all tracking-widest" id="loginAccessCode" placeholder="••••••" required="" type="password"/>
+<p class="text-xs text-gray-400 mt-1 italic">* 6-digit code provided by your admin</p>
+</div>
+<button class="w-full bg-cricket-action hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all uppercase tracking-widest" type="submit">
+          Enter Pavilion
+        </button>
+</form>
+<!-- END: LoginForm -->
+<!-- BEGIN: RegistrationForm (Hidden by default) -->
+<form class="space-y-6 hidden" data-purpose="team-registration-form" id="regForm">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-gray-200" for="regTeamName">New Team Name</label>
+<input class="w-full bg-white/10 border-white/20 rounded-lg py-3 px-4 text-white focus:ring-2 focus:ring-cricket-gold focus:border-transparent transition-all" id="regTeamName" placeholder="e.g. Mumbai Mavericks" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-gray-200" for="regAccessCode">Invite Access Code</label>
+<input class="w-full bg-white/10 border-white/20 rounded-lg py-3 px-4 text-white focus:ring-2 focus:ring-cricket-gold focus:border-transparent transition-all" id="regAccessCode" placeholder="Enter tournament invite code" required="" type="text"/>
+<p class="text-xs text-gray-400 mt-1 italic">Contact Tournament Organizer for your specific team invite</p>
+</div>
+<div class="flex items-start gap-2">
+<input class="mt-1 rounded bg-white/10 border-white/20 text-cricket-gold focus:ring-cricket-gold" id="terms" required="" type="checkbox"/>
+<label class="text-xs text-gray-300" for="terms">We agree to follow the local gully rules and tournament fair-play guidelines.</label>
+</div>
+<button class="w-full bg-cricket-gold hover:bg-yellow-500 text-cricket-pitch font-bold py-3 rounded-lg shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all uppercase tracking-widest" type="submit">
+          Register Team
+        </button>
+</form>
+<!-- END: RegistrationForm -->
+</section>
+<!-- END: Form Card -->
+<!-- BEGIN: Footer Links -->
+<footer class="mt-8 text-center space-y-4" data-purpose="form-footer">
+<a class="text-sm text-gray-400 hover:text-white transition-colors underline decoration-cricket-gold/30" href="#">Lost your access code? Contact Admin</a>
+<div class="pt-4 border-t border-white/10">
+<p class="text-xs text-gray-500">© 2023 Gully Cricket App - Street Cricket, Pro Style.</p>
+</div>
+</footer>
+<!-- END: Footer Links -->
+</main>
+<!-- END: Auth Container -->
+<!-- BEGIN: Interactive Logic -->
+<script data-purpose="tab-switching">
+    const loginTab = document.getElementById('loginTab');
+    const regTab = document.getElementById('regTab');
+    const loginForm = document.getElementById('loginForm');
+    const regForm = document.getElementById('regForm');
+
+    const activeClasses = ['text-cricket-gold', 'border-b-2', 'border-cricket-gold'];
+    const inactiveClasses = ['text-gray-400'];
+
+    function switchTab(showLogin) {
+      if (showLogin) {
+        // Show Login
+        loginForm.classList.remove('hidden');
+        regForm.classList.add('hidden');
+        // Update Tabs
+        loginTab.classList.add(...activeClasses);
+        loginTab.classList.remove(...inactiveClasses);
+        regTab.classList.add(...inactiveClasses);
+        regTab.classList.remove(...activeClasses);
+      } else {
+        // Show Registration
+        loginForm.classList.add('hidden');
+        regForm.classList.remove('hidden');
+        // Update Tabs
+        regTab.classList.add(...activeClasses);
+        regTab.classList.remove(...inactiveClasses);
+        loginTab.classList.add(...inactiveClasses);
+        loginTab.classList.remove(...activeClasses);
+      }
+    }
+
+    loginTab.addEventListener('click', () => switchTab(true));
+    regTab.addEventListener('click', () => switchTab(false));
+  </script>
+<!-- END: Interactive Logic -->
+</body></html>
