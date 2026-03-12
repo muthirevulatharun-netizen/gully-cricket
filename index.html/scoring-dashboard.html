@@ -49,11 +49,11 @@
 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
           Scoring Control
         </button>
-<button class="flex items-center gap-3 text-slate-400 hover:bg-slate-800 p-3 rounded-xl transition-colors">
+<button class="flex items-center gap-3 text-slate-400 hover:bg-slate-800 p-3 rounded-xl transition-colors" data-nav="team-management">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           Team Management
         </button>
-<button class="flex items-center gap-3 text-slate-400 hover:bg-slate-800 p-3 rounded-xl transition-colors">
+<button class="flex items-center gap-3 text-slate-400 hover:bg-slate-800 p-3 rounded-xl transition-colors" data-nav="match-history">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
           Match History
         </button>
@@ -77,10 +77,10 @@
 <div class="text-center md:text-left">
 <h2 class="text-slate-500 uppercase tracking-widest text-xs font-bold mb-1">Live Match</h2>
 <div class="flex items-center gap-4">
-<span class="text-4xl font-black text-white">142/4</span>
+<span class="text-4xl font-black text-white" id="scoreTotal">0/0</span>
 <span class="px-3 py-1 bg-cricket-green/20 text-cricket-green rounded-full text-sm font-semibold">1st Innings</span>
 </div>
-<p class="text-slate-400 text-sm mt-2">Overs: <span class="text-white">14.2 / 20.0</span></p>
+<p class="text-slate-400 text-sm mt-2">Overs: <span class="text-white" id="oversText">0.0 / 20.0</span></p>
 </div>
 <div class="flex gap-4 items-center">
 <div class="text-center">
@@ -99,9 +99,9 @@
 <div class="flex flex-col gap-3">
 <div class="flex justify-between items-center bg-slate-950 p-3 rounded-lg border border-slate-800">
 <span class="text-sm text-slate-400">Team A ID:</span>
-<span class="text-sm font-mono text-cricket-gold select-all">#GAL-9821</span>
+<span class="text-sm font-mono text-cricket-gold select-all" id="teamIdDisplay">#GAL-0000</span>
 </div>
-<button class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-sm rounded-lg transition-colors font-medium" onclick="alert('Generating new ID...')">
+<button class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-sm rounded-lg transition-colors font-medium" id="generateTeamIdBtn">
               Generate Team ID
             </button>
 </div>
@@ -116,25 +116,26 @@
 <span class="w-2 h-2 rounded-full bg-cricket-green"></span> Add Runs
           </h3>
 <div class="grid grid-cols-2 gap-4">
-<button class="tap-active bg-slate-800 hover:bg-slate-700 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 border-slate-700 hover:border-slate-600 transition-all">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 border-slate-700 hover:border-slate-600 transition-all" data-runs="1">
 <span class="text-3xl font-black">+1</span>
 <span class="text-[10px] uppercase text-slate-500">Single</span>
 </button>
-<button class="tap-active bg-slate-800 hover:bg-slate-700 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 border-slate-700 hover:border-slate-600 transition-all">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 border-slate-700 hover:border-slate-600 transition-all" data-runs="2">
 <span class="text-3xl font-black">+2</span>
 <span class="text-[10px] uppercase text-slate-500">Double</span>
 </button>
-<button class="tap-active bg-cricket-blue/10 border-cricket-blue/50 border hover:bg-cricket-blue/20 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-all">
+<button class="tap-active bg-cricket-blue/10 border-cricket-blue/50 border hover:bg-cricket-blue/20 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-all" data-runs="4">
 <span class="text-3xl font-black text-cricket-blue">+4</span>
 <span class="text-[10px] uppercase text-cricket-blue/70">Boundary</span>
 </button>
-<button class="tap-active bg-cricket-gold/10 border-cricket-gold/50 border hover:bg-cricket-gold/20 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-all">
+<button class="tap-active bg-cricket-gold/10 border-cricket-gold/50 border hover:bg-cricket-gold/20 h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 transition-all" data-runs="6">
 <span class="text-3xl font-black text-cricket-gold">+6</span>
 <span class="text-[10px] uppercase text-cricket-gold/70">Maximum</span>
 </button>
 </div>
 <div class="mt-4">
-<button class="tap-active w-full bg-slate-800 hover:bg-slate-700 h-16 rounded-xl text-xl font-bold border-b-4 border-slate-700">0 <span class="text-xs font-normal text-slate-500 uppercase ml-2">Dot Ball</span></button>
+<button class="tap-active w-full bg-slate-800 hover:bg-slate-700 h-16 rounded-xl text-xl font-bold border-b-4 border-slate-700" data-runs="0">
+0 <span class="text-xs font-normal text-slate-500 uppercase ml-2">Dot Ball</span></button>
 </div>
 </div>
 <!-- Wickets & Extras Section -->
@@ -144,7 +145,7 @@
           </h3>
 <div class="space-y-4">
 <!-- Wicket Button -->
-<button class="tap-active w-full bg-cricket-red/10 border border-cricket-red/50 hover:bg-cricket-red/20 h-24 rounded-2xl flex items-center justify-center gap-4 border-b-4 transition-all group">
+<button class="tap-active w-full bg-cricket-red/10 border border-cricket-red/50 hover:bg-cricket-red/20 h-24 rounded-2xl flex items-center justify-center gap-4 border-b-4 transition-all group" data-wicket="true">
 <div class="bg-cricket-red p-3 rounded-full text-white">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
 </div>
@@ -155,15 +156,15 @@
 </button>
 <!-- Extras Grid -->
 <div class="grid grid-cols-3 gap-3">
-<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all" data-extra="wide" data-runs="1">
 <span class="block font-bold">WD</span>
 <span class="text-[10px] text-slate-500">Wide</span>
 </button>
-<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all" data-extra="noBall" data-runs="1">
 <span class="block font-bold">NB</span>
 <span class="text-[10px] text-slate-500">No Ball</span>
 </button>
-<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all">
+<button class="tap-active bg-slate-800 hover:bg-slate-700 py-4 rounded-xl text-center border-b-2 border-slate-700 transition-all" data-extra="bye" data-runs="1">
 <span class="block font-bold">B/LB</span>
 <span class="text-[10px] text-slate-500">Byes</span>
 </button>
@@ -176,59 +177,157 @@
 <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6" data-purpose="match-history-log">
 <div class="flex justify-between items-center mb-6">
 <h3 class="text-slate-400 text-sm font-bold uppercase">Recent Ball Log</h3>
-<button class="text-xs text-cricket-blue font-semibold hover:underline">Undo Last Ball</button>
+<button class="text-xs text-cricket-blue font-semibold hover:underline" id="undoBtn">Undo Last Ball</button>
 </div>
-<div class="flex flex-wrap gap-3">
-<!-- Ball 14.2 -->
-<div class="flex flex-col items-center gap-1">
-<div class="w-10 h-10 rounded-full bg-cricket-blue/20 border border-cricket-blue text-cricket-blue flex items-center justify-center font-bold">4</div>
-<span class="text-[10px] text-slate-500">14.2</span>
-</div>
-<!-- Ball 14.1 -->
-<div class="flex flex-col items-center gap-1">
-<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">1</div>
-<span class="text-[10px] text-slate-500">14.1</span>
-</div>
-<!-- Ball 13.6 (Wicket) -->
-<div class="flex flex-col items-center gap-1">
-<div class="w-10 h-10 rounded-full bg-cricket-red/20 border border-cricket-red text-cricket-red flex items-center justify-center font-bold">W</div>
-<span class="text-[10px] text-slate-500">13.6</span>
-</div>
-<!-- Ball 13.5 -->
-<div class="flex flex-col items-center gap-1">
-<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">•</div>
-<span class="text-[10px] text-slate-500">13.5</span>
-</div>
-<!-- Ball 13.4 -->
-<div class="flex flex-col items-center gap-1">
-<div class="w-10 h-10 rounded-full bg-cricket-gold/20 border border-cricket-gold text-cricket-gold flex items-center justify-center font-bold">6</div>
-<span class="text-[10px] text-slate-500">13.4</span>
-</div>
-<!-- Ball 13.3 -->
-<div class="flex flex-col items-center gap-1">
-<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">1</div>
-<span class="text-[10px] text-slate-500">13.3</span>
-</div>
-<!-- More balls... -->
-<div class="flex flex-col items-center gap-1 opacity-50">
-<div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center font-bold">2</div>
-<span class="text-[10px] text-slate-500">13.2</span>
-</div>
-</div>
+<div class="flex flex-wrap gap-3" id="ballLog"></div>
 </section>
 <!-- END: Recent History Log -->
 </main>
 <!-- END: Main Content Area -->
 </div>
-<!-- BEGIN: Interactive Logic (Simulated) -->
+<!-- BEGIN: Interactive Logic -->
 <script data-purpose="scoring-ui-interactions">
-    // Simple visual feedback for button taps
-    document.querySelectorAll('button').forEach(btn => {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Sidebar navigation
+    const teamNav = document.querySelector('button[data-nav="team-management"]');
+    const historyNav = document.querySelector('button[data-nav="match-history"]');
+    teamNav?.addEventListener('click', () => {
+      window.location.href = '/team-management.html';
+    });
+    historyNav?.addEventListener('click', () => {
+      window.location.href = '/live-stream.html';
+    });
+
+    // Team ID generator
+    const teamIdDisplay = document.getElementById('teamIdDisplay');
+    const generateTeamIdBtn = document.getElementById('generateTeamIdBtn');
+    generateTeamIdBtn?.addEventListener('click', () => {
+      const prefix = 'GAL';
+      const number = Math.floor(1000 + Math.random() * 9000);
+      teamIdDisplay.textContent = `#${prefix}-${number}`;
+    });
+
+    // Scoring state
+    let runs = 0;
+    let wickets = 0;
+    let legalBalls = 0; // only legal deliveries
+    const totalOvers = 20;
+    const history = []; // { runsDelta, isWicket, legalDelivery, symbol, overBall }
+
+    const scoreTotalEl = document.getElementById('scoreTotal');
+    const oversTextEl = document.getElementById('oversText');
+    const ballLogEl = document.getElementById('ballLog');
+    const undoBtn = document.getElementById('undoBtn');
+
+    function formatOvers(legalBallsCount) {
+      const overs = Math.floor(legalBallsCount / 6);
+      const balls = legalBallsCount % 6;
+      return `${overs}.${balls}`;
+    }
+
+    function renderScore() {
+      scoreTotalEl.textContent = `${runs}/${wickets}`;
+      oversTextEl.textContent = `${formatOvers(legalBalls)} / ${totalOvers}.0`;
+    }
+
+    function renderHistory() {
+      ballLogEl.innerHTML = '';
+      const lastBalls = history.slice(-12);
+      lastBalls.forEach((ball) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'flex flex-col items-center gap-1';
+
+        const circle = document.createElement('div');
+        circle.className = 'w-10 h-10 rounded-full flex items-center justify-center font-bold';
+
+        if (ball.symbol === 'W') {
+          circle.classList.add('bg-cricket-red/20', 'border', 'border-cricket-red', 'text-cricket-red');
+        } else if (ball.symbol === '4' || ball.symbol === '6') {
+          circle.classList.add('bg-cricket-gold/20', 'border', 'border-cricket-gold', 'text-cricket-gold');
+        } else if (ball.extra === 'wide' || ball.extra === 'noBall') {
+          circle.classList.add('bg-cricket-blue/20', 'border', 'border-cricket-blue', 'text-cricket-blue');
+        } else {
+          circle.classList.add('bg-slate-800', 'border', 'border-slate-700', 'text-slate-400');
+        }
+
+        circle.textContent = ball.symbol;
+
+        const label = document.createElement('span');
+        label.className = 'text-[10px] text-slate-500';
+        label.textContent = ball.overBall;
+
+        wrapper.appendChild(circle);
+        wrapper.appendChild(label);
+        ballLogEl.appendChild(wrapper);
+      });
+    }
+
+    function recordBall({ runsDelta, isWicket = false, legalDelivery = true, extra = null, symbol }) {
+      if (runsDelta < 0) runsDelta = 0;
+
+      const overBefore = Math.floor(legalBalls / 6);
+      const ballNumber = (legalBalls % 6) + 1;
+      const overBall = `${overBefore}.${ballNumber}`;
+
+      runs += runsDelta;
+      if (isWicket) {
+        wickets += 1;
+      }
+      if (legalDelivery) {
+        legalBalls += 1;
+      }
+
+      history.push({ runsDelta, isWicket, legalDelivery, extra, symbol, overBall });
+      renderScore();
+      renderHistory();
+    }
+
+    // Run buttons
+    document.querySelectorAll('button[data-runs]').forEach((btn) => {
       btn.addEventListener('click', () => {
-        // Here we would typically update a state or send data to a backend
-        console.log('Action recorded:', btn.innerText.replace(/\n/g, ' '));
+        const runsDelta = Number(btn.getAttribute('data-runs')) || 0;
+        const symbol = runsDelta === 0 ? '•' : String(runsDelta);
+        recordBall({ runsDelta, isWicket: false, legalDelivery: true, extra: null, symbol });
       });
     });
-  </script>
+
+    // Wicket button
+    const wicketBtn = document.querySelector('button[data-wicket="true"]');
+    wicketBtn?.addEventListener('click', () => {
+      recordBall({ runsDelta: 0, isWicket: true, legalDelivery: true, extra: null, symbol: 'W' });
+    });
+
+    // Extras buttons
+    document.querySelectorAll('button[data-extra]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const extra = btn.getAttribute('data-extra');
+        const runsDelta = Number(btn.getAttribute('data-runs')) || 1;
+        const legalDelivery = extra === 'bye';
+        const symbol = extra === 'bye' ? 'B' : extra === 'wide' ? 'Wd' : 'Nb';
+        recordBall({ runsDelta, isWicket: false, legalDelivery, extra, symbol });
+      });
+    });
+
+    // Undo last ball
+    undoBtn?.addEventListener('click', () => {
+      const last = history.pop();
+      if (!last) return;
+      runs -= last.runsDelta;
+      if (runs < 0) runs = 0;
+      if (last.isWicket) {
+        wickets = Math.max(0, wickets - 1);
+      }
+      if (last.legalDelivery) {
+        legalBalls = Math.max(0, legalBalls - 1);
+      }
+      renderScore();
+      renderHistory();
+    });
+
+    // Initial render
+    renderScore();
+    renderHistory();
+  });
+</script>
 <!-- END: Interactive Logic -->
 </body></html>
