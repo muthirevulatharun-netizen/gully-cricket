@@ -71,6 +71,11 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Gully Cricket backend is running' });
 });
 
+// Friendly root route for Render / browser
+app.get('/', (req, res) => {
+  res.send('Gully Cricket backend is running. Use /api/health to check status and the /api/* routes for data.');
+});
+
 // Team endpoints
 app.post('/api/teams', (req, res) => {
   const { name, players = [], rosterSize } = req.body || {};
