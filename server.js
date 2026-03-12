@@ -82,14 +82,17 @@ app.get('/', (req, res) => {
 
 // Team endpoints
 app.post('/api/teams', (req, res) => {
-  const { name, players = [], rosterSize } = req.body || {};
+  const { name, players = [], rosterSize, accessCode: customAccessCode } = req.body || {};
 
   if (!name || typeof name !== 'string') {
     return res.status(400).json({ error: 'Team name is required' });
   }
 
   const id = generateId('TEAM');
-  const accessCode = generateAccessCode();
+  const accessCode =
+    typeof customAccessCode === 'string' && customAccessCode.trim().length > 0
+      ? customAccessCode.trim()
+      : generateAccessCode();
 
   const team = {
     id,

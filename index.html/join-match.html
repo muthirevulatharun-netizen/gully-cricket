@@ -154,4 +154,97 @@
     regTab.addEventListener('click', () => switchTab(false));
   </script>
 <!-- END: Interactive Logic -->
+
+<!-- BEGIN: Backend Integration -->
+<script data-purpose="api-integration">
+  const loginTeamNameInput = document.getElementById('loginTeamName');
+  const loginAccessCodeInput = document.getElementById('loginAccessCode');
+  const regTeamNameInput = document.getElementById('regTeamName');
+  const regAccessCodeInput = document.getElementById('regAccessCode');
+
+  const loginError = document.createElement('p');
+  loginError.className = 'text-sm text-red-400 mt-2';
+  loginError.style.display = 'none';
+  loginForm.appendChild(loginError);
+
+  const regMessage = document.createElement('p');
+  regMessage.className = 'text-sm text-cricket-gold mt-2';
+  regMessage.style.display = 'none';
+  regForm.appendChild(regMessage);
+
+  loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    loginError.style.display = 'none';
+
+    const name = loginTeamNameInput.value.trim();
+    const accessCode = loginAccessCodeInput.value.trim();
+
+    try {
+      const response = await fetch('/api/auth/team/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, accessCode })
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        loginError.textContent = data.error || 'Login failed. Check team name and access code.';
+        loginError.style.display = 'block';
+        return;
+      }
+
+      const data = await response.json();
+      // Redirect to scoring dashboard with team info in query string
+      const params = new URLSearchParams({
+        teamId: data.teamId,
+        teamName: data.name
+      });
+      window.location.href = `/scoring-dashboard.html?${params.toString()}`;
+    } catch (err) {
+      loginError.textContent = 'Unable to reach server. Please try again.';
+      loginError.style.display = 'block';
+    }
+  });
+
+  regForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    regMessage.style.display = 'none';
+
+    const name = regTeamNameInput.value.trim();
+    const desiredCode = regAccessCodeInput.value.trim();
+
+    try {
+      const response = await fetch('/api/teams', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, accessCode: desiredCode })
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        regMessage.textContent = data.error || 'Could not register team. Please try again.';
+        regMessage.className = 'text-sm text-red-400 mt-2';
+        regMessage.style.display = 'block';
+        return;
+      }
+
+      const data = await response.json();
+      regMessage.textContent = `Team registered! Use team name "${data.name}" and access code "${data.accessCode}" on the Login tab.`;
+      regMessage.className = 'text-sm text-cricket-gold mt-2';
+      regMessage.style.display = 'block';
+
+      // Optionally switch to login tab after a short delay
+      setTimeout(() => {
+        switchTab(true);
+        loginTeamNameInput.value = data.name;
+        loginAccessCodeInput.value = data.accessCode;
+      }, 1000);
+    } catch (err) {
+      regMessage.textContent = 'Unable to reach server. Please try again.';
+      regMessage.className = 'text-sm text-red-400 mt-2';
+      regMessage.style.display = 'block';
+    }
+  });
+</script>
+<!-- END: Backend Integration -->
 </body></html>
