@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const { nanoid } = require('nanoid');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -13,6 +12,11 @@ const teams = new Map(); // id -> team
 const matches = new Map(); // id -> match
 
 let currentMatchId = null;
+
+function generateId(prefix) {
+  const random = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `${prefix}_${random}`;
+}
 
 function generateAccessCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -75,7 +79,7 @@ app.post('/api/teams', (req, res) => {
     return res.status(400).json({ error: 'Team name is required' });
   }
 
-  const id = `TEAM_${nanoid(6)}`;
+  const id = generateId('TEAM');
   const accessCode = generateAccessCode();
 
   const team = {
@@ -129,7 +133,7 @@ app.post('/api/matches', (req, res) => {
     return res.status(400).json({ error: 'Both teams must exist' });
   }
 
-  const id = `MATCH_${nanoid(6)}`;
+  const id = generateId('MATCH');
   const match = createMatchState({ id, battingTeamId, bowlingTeamId, totalOvers });
 
   matches.set(id, match);
